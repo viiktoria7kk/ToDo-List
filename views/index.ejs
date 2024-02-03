@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="/main.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+    />
+
+    <title>ToDo List</title>
+  </head>
+  <body>
+    <div class="container">
+      <h1>What are you going to do today?</h1>
+      <form action="/" method="post" autocomplete="off">
+        <input
+          type="text"
+          placeholder="Add an item..."
+          name="todoValue"
+          required
+        />
+        <button type="submit">Add</button>
+      </form>
+
+      <div class="todo-container">
+        <% if(data) { %> <% data.forEach(todoValue => { %>
+        <div class="todo-value">
+          <%= todoValue.todo %>
+          <span class="todo-delete <%= todoValue.id %>">
+            <i class="far fa-trash-alt"></i>
+          </span>
+        </div>
+        <% }) %> <% } %>
+      </div>
+    </div>
+
+    <script>
+      const deleteButton = document.querySelectorAll(".todo-delete");
+      deleteButton.forEach((button, i) => {
+        button.addEventListener("click", () => {
+          const endPoint = `/${button.classList[1]}`;
+          fetch(endPoint, {
+            method: "DELETE",
+          });
+          window.location.href = "/";
+        });
+      });
+    </script>
+  </body>
+</html>
