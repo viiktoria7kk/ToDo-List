@@ -4,6 +4,7 @@
   "description": "To Do List for your plans.",
   "main": "server.js",
   "scripts": {
+    "start": "node server.js",
     "dev": "nodemon server.js"
   },
   "repository": {
